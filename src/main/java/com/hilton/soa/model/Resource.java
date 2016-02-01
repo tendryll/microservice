@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Resource {
   @NotNull
-  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+  // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private Integer id;
 
   @NotEmpty

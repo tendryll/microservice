@@ -1,5 +1,6 @@
 package com.hilton.soa.service.impl;
 
+import javax.ws.rs.NotFoundException;
 import com.hilton.soa.model.Resource;
 import com.hilton.soa.repository.ResourceRepository;
 import com.hilton.soa.service.ResourceService;
@@ -24,6 +25,12 @@ public class ResourceServiceImpl implements ResourceService {
   }
 
   public Resource getById(Integer id) {
-    return resourceRepository.findById(id);
+    final Resource resource = resourceRepository.findById(id);
+
+    if (resource == null) {
+      throw new NotFoundException("Resource not found.");
+    }
+
+    return resource;
   }
 }
