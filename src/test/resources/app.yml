@@ -3,7 +3,7 @@ server:
   maxThreads: 1024
 
 database:
-  driverClass: org.mariadb.jdbc.Driver
-  url: 'jdbc:mysql://localhost:3306/soa'
-  user: root
+  driverClass: org.h2.Driver
+  url: 'jdbc:h2:./target/example'
+  user: sa
   password:

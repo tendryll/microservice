@@ -1,7 +1,8 @@
 package com.hilton.soa.api;
 
 import java.net.URI;
-import java.util.concurrent.atomic.AtomicInteger;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import com.hilton.soa.model.Resource;
@@ -10,17 +11,16 @@ import com.hilton.soa.service.ResourceService;
 @Path("/resource")
 public class Api {
   private ResourceService resourceService;
-  private AtomicInteger atomic = new AtomicInteger();
 
   public Api(ResourceService resourceService) {
     this.resourceService = resourceService;
   }
 
   @POST()
-  public Response createWidget(final Resource resource) {
-    final Integer id = atomic.incrementAndGet();
-
-    resourceService.insert(id, resource.getName(), resource.getDescription());
+  @Consumes(value = "application/json")
+  @Produces(value = "application/json")
+  public Response createWidget(@Valid() @NotNull() final Resource resource) {
+    final long id = resourceService.insert(resource.getName(), resource.getDescription());
 
     final URI uri = URI.create(String.format("/resource/%d", id));
 
@@ -38,14 +38,18 @@ public class Api {
 
   @Path("/{id}")
   @PUT()
-  public Response updateWidget(@PathParam("id") final Integer id, final Resource resource) {
+  @Consumes(value = "application/json")
+  @Produces(value = "application/json")
+  public Response updateWidget(@PathParam("id") final Integer id,
+      @Valid() @NotNull() final Resource resource) {
     resourceService.update(id, resource.getName(), resource.getDescription());
 
     return Response.noContent().build();
   }
 
   @Path("/{id}")
-  @DELETE
+  @DELETE()
+  @Produces(value = "application/json")
   public Response removeWidget(@PathParam("id") final Integer id) {
     resourceService.delete(id);
 

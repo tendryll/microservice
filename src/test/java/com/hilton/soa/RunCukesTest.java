@@ -10,9 +10,14 @@ import io.dropwizard.testing.junit.DropwizardAppRule;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = {"pretty", "html:target/cucumber"},
-  features = {"classpath:features/resource.get.feature"},
+  features = {
+      "classpath:features/resource.get.feature",
+      "classpath:features/resource.post.feature",
+      "classpath:features/resource.put.feature",
+      "classpath:features/resource.delete.feature"
+  },
   glue = {"com.hilton.soa.steps"})
-public class RunCukesIT {
+public class RunCukesTest {
   @ClassRule
   public static final DropwizardAppRule<AppConfig> RULE = new DropwizardAppRule<>(
       App.class, ResourceHelpers.resourceFilePath("app.yml"));

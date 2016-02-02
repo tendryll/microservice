@@ -12,18 +12,30 @@ public class ResourceServiceImpl implements ResourceService {
     this.resourceRepository = resourceRepository;
   }
 
-  public void insert(Integer id, String name, String description) {
-    resourceRepository.insert(id, name, description);
+  @Override()
+  public long insert(String name, String description) {
+    return resourceRepository.insert(name, description);
   }
 
+  @Override()
   public void delete(Integer id) {
+    if (resourceRepository.findById(id) == null) {
+      throw new NotFoundException("Resource not found.");
+    }
+
     resourceRepository.delete(id);
   }
 
+  @Override()
   public void update(Integer id, String name, String description) {
+    if (resourceRepository.findById(id) == null) {
+      throw new NotFoundException("Resource not found.");
+    }
+
     resourceRepository.update(id, name, description);
   }
 
+  @Override()
   public Resource getById(Integer id) {
     final Resource resource = resourceRepository.findById(id);
 

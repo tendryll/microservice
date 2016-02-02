@@ -6,11 +6,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Resource {
-  @NotNull
-  // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private Integer id;
 
-  @NotEmpty
+  @NotEmpty(message = "Name is not provided.")
   private String name;
   private String description;
 
