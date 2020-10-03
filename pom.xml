@@ -119,7 +119,7 @@
       </plugin>
 
       <!-- for creating and initializing the database with values -->
-      <plugin>
+      <!-- <plugin>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-maven-plugin</artifactId>
         <version>3.4.1</version>
@@ -140,7 +140,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
 
       <plugin>
         <groupId>org.jacoco</groupId>
